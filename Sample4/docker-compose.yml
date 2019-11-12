@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  serilogdemo:
+    image: serilogdemo
+    build: 
+      context: .
+      dockerfile: ./dockerfile
+    depends_on:
+    - "seqservice"
+    command: ["./wait-for-it.sh", "seqservice:80", "--", "python", "app.py"]
+    ports:
+    - "8000:80"
+    - "8443:443"
+    environment:
+    - ASPNETCORE_HTTPS_PORT=8443
+    - ASPNETCORE_URLS=https://+:443;http://+:80
+    - Kestrel__Certificates__Default__Path=/root/.dotnet/https/cert-aspnetcore.pfx
+    - Kestrel__Certificates__Default__Password=Pwd12345. 
+    volumes:
+    - C:\temp\docker\:/root/.dotnet/https
+  seqservice:
+    image: datalust/seq:latest
+    ports:
+    - "8081:80"
+    environment:
+    - ACCEPT_EULA=Y
