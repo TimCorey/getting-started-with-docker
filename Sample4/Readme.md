@@ -10,5 +10,7 @@ Docker Compose allows us to start more than one contain up and have them have ac
 6. Dependent containers are started first but they might not be completely running before the container that depends on them starts. In this case, use a script like `wait-for-it.sh` to pause the system until the port is activated. You can get the `wait-for-it.sh` script at https://github.com/vishnubob/wait-for-it
 
 ## Commands
-- `docker-compose up` - Starts up the orchestration process, builds the images (if needed), and launches the containers in order with the specified parameters.
+- `docker-compose up` - Starts up the orchestration process, builds the images (if needed), and launches the containers in order with the specified parameters. Use the `-d` for detached operation.
 - `docker-compose up --build` - Starts the orchestration process like above but rebuilds the containers if they already exist (rather than just using the existing containers).
+- `docker-compose stop` - Stops the containers but does not remove them.
+- `docker-compose down` - Stops and removes the containers.
